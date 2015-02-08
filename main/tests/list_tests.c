@@ -1,6 +1,6 @@
 //see ex32 page for project structure before compiling this file
 #include "minunit.h"
-#include "list.h"
+#include "../src/list.h"
 #include <assert.h>
 
 static List *list = NULL;

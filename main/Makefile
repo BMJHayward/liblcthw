@@ -41,6 +41,7 @@ build: #//makes /build or /bin if not exist
 #The Unit Tests
 .PHONY: tests #//phony used so make will ignore any files named tests and run anyway
 tests: CFLAGS += -l $(TARGET) #//links each test program to target library
+tests: CFLAGS = $(filter-out -Wextra, -Wall)
 tests: $(TESTS) #//builds tests
 	sh ./tests/runtests.sh #//runs tests so you can see results
 
