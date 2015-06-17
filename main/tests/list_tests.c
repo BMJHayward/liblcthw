@@ -105,3 +105,4 @@ char *all_tests() {//does everything like a boss
 }
 
 RUN_TESTS(all_tests);
+

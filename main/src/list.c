@@ -120,3 +120,4 @@ void *List_remove(List *list, ListNode *node)//all steps for list pop and shift 
 error:
     return result;
 }
+
