@@ -8,7 +8,7 @@
 #ifdef NDEBUG  //lets yu recompile with dbg log messages removed
 #define debug(M, ...)
 #else
-#define debug(M, ...) fprintf(stderr, "DEBUG %s:%d " M "\n", __FILE__, __LINE__, ##__VA_ARGS__) 
+#define debug(M, ...) fprintf(stderr, "DEBUG %s:%d: " M "\n", __FILE__, __LINE__, ##__VA_ARGS__) 
 //translates any use of debug('format', arg1, arg2) to fprintf call to stderr
 //##__VA_ARGS__ allows extra arguments to be placed here
 #endif
@@ -32,9 +32,3 @@
 
 #endif
 
-/* pattern for writing in C:
-*call function
-*see if return value is an error, must look up if so
-*clean up all resouce created so far
-*print useful error message
-*/
