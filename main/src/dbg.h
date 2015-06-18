@@ -31,10 +31,3 @@
 #define check_debug(A, M, ...) if(!(A)) { debug(M, ##__VA_ARGS__); errno=0; goto error; }//still checks and handles, but doesn't log error. use for common errors
 
 #endif
-
-/* pattern for writing in C:
-*call function
-*see if return value is an error, must look up if so
-*clean up all resouce created so far
-*print useful error message
-*/

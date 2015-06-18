@@ -13,7 +13,7 @@
     message = test(); tests_run++; if (message) return message;
 
 #define RUN_TESTS(name) int main(int argc, char *argv[]) {\
-    /*argc = 1; \ commented out to test, argc assigned but not used */
+    argc = 1; \
     debug("------ RUNNING: %s", argv[0]);\
         printf("----\nRUNNING: %s\n", argv[0]);\
         char *result = name();\
@@ -24,11 +24,9 @@
             printf("ALL TESTS PASSED\n");\
         }\
     printf("Tests run: %d\n", tests_run);\
-        exit(result != 0);\
-}
+    exit(result != 0);\
+    }
 
 int tests_run;
 
 #endif
-
-//uses dbg.h macros. RUN_TESTS() a 'boilerplate' macro
