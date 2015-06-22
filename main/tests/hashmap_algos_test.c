@@ -1,6 +1,6 @@
-#include <lcthw/bstrlib.h>
-#include <lcthw/hashmap.h>
-#include <lcthw/darray.h>
+#include "../src/bstrlib.h"
+#include "../src/hashmap.h"
+#include "../src/darray.h"
 #include "minunit.h"
 //after test is run, can also look at distribution of keys with R
 struct tagbstring test1 = bsStatic("test data 1");

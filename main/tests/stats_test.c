@@ -1,5 +1,5 @@
 #include "minunit.h"
-#include <lcthw/stats.h>
+#include "../src/stats.h"
 #include <math.h>
 
 const int NUM_SAMPLES = 10;

@@ -1,5 +1,5 @@
 #include "minunit.h"
-#include <lcthw/darray.h>
+#include "../src/darray.h"
 //this file creates an array and iterates through each function outlined in header, testing returned results with minunit.h macros
 static DArray *array = NULL;
 static int *val1 = NULL;

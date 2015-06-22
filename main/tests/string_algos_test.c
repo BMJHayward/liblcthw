@@ -1,6 +1,6 @@
 #include "minunit.h"
-#include <lcthw/string_algos.h>
-#include <lcthw/bstrlib.h>
+#include "../src/string_algos.h"
+#include "../src/bstrlib.h"
 #include <time.h>
 
 struct tagbstring IN_STR = bsStatic("I have ALPHA beta ALPHA and oranges ALPHA");

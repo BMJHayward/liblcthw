@@ -1,5 +1,5 @@
 #include "minunit.h"
-#include <lcthw/darray_algos.h>
+#include "../src/darray_algos.h"
 
 int testcmp(char **a, char **b)//simple a b comparison, strcmp() from stdlib.h
 {

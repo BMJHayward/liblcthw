@@ -1,8 +1,8 @@
 #include "minunit.h"
-#include <lcthw/tstree.h>
+#include "../src/tstree.h"
 #include <string.h>
 #include <assert.h>
-#include <lcthw/bstrlib.h>
+#include "../src/bstrlib.h"
 //setup all the things
 TSTree *node = NULL;
 char *valueA = "VALUEA";
