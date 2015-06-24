@@ -63,7 +63,7 @@ install: all
 #The Checker//big REGEX to find bad C funcs like strcpy
 BADFUNCS='[^_.>a-zA-z0-9] (str(n?cpy|n?cat|xfrm|n?dup|str|pbrk|tok|_)|stpn?cpy|a?sn?printf|byte_)'
 check: #//lets me run a check whenever needed
-	@echo Files with potentially dangerous functions.
+	@echo "Files with potentially dangerous functions.";
 	@egrep $(BADFUNCS) $(SOURCES) || true 
 #	//egrep to print output and not its command ||true prevents make from reporting failure if egrep doesn't find anything
 
