@@ -81,7 +81,7 @@ void destroy_routes(TSTree *routes)//as named
     TSTree_destroy(routes);
 }
 
-int main(int argc, char *argv[])
+int urlor_main(int argc, char *argv[])
 {//takes URL as arg in argv[1]
     bstring url = NULL;
     bstring route = NULL;

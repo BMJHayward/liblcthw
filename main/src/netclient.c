@@ -100,7 +100,7 @@ error:
     return -1;
 }
 
-int main(int argc, char *argv[])
+int netclient_main(int argc, char *argv[])
 {
     fd_set allreads;
     fd_set readmask;

@@ -34,7 +34,7 @@ void Variant_print(Variant *var)//id an input according to its .type, then print
     }
 }
 
-int main(int argc, char *argv[])
+int C_union_main(int argc, char *argv[])
 {
     Variant a_int = {.type = TYPE_INT, .data.as_integer = 100};//assigns a_int values in .type and .data* in a Variant struct
     Variant a_float = {.type = TYPE_FLOAT, .data.as_float = 100.34};
