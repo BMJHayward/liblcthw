@@ -25,7 +25,7 @@
             printf("ALL TESTS PASSED\n");\
         }\
     printf("Tests run: %d\n", tests_run);\
-    exit(result != 0);\
+        exit(result != 0);\
     }
 
 int tests_run;

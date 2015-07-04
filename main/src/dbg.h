@@ -1,33 +1,46 @@
-#ifndef __dbg_h__ //this way you don't include the file twice by accident
+fndef __dbg_h__
 #define __dbg_h__
 
-#include <stdio.h> 
+#include <stdio.h>
 #include <errno.h>
 #include <string.h>
 
-#ifdef NDEBUG  //lets yu recompile with dbg log messages removed
+#ifdef NDEBUG
 #define debug(M, ...)
 #else
-#define debug(M, ...) fprintf(stderr, "DEBUG %s:%d: " M "\n", __FILE__, __LINE__, ##__VA_ARGS__) 
-//translates any use of debug('format', arg1, arg2) to fprintf call to stderr
-//##__VA_ARGS__ allows extra arguments to be placed here
+#define debug(M, ...) fprintf(stderr, "DEBUG %s:%d: " M "\n", __FILE__, __LINE__, ##__VA_ARGS__)
 #endif
 
-#define clean_errno() (errno == 0 ? "None" : strerror(errno))//cretes safe readable version of errno
 
+// do not try to be smart and make this go away on NDEBUG, the _debug
+// here means that it just doesn't print a message, it still does the
+// check.  MKAY?
+#define check_debug(A, M, ...) if(!(A)) { debug(M, ##__VA_ARGS__); errno=0; goto error; }
+
+#define clean_errno() (errno == 0 ? "None" : strerror(errno))
+
+#ifdef NO_LINENOS
+// versions that don't feature line numbers
+#define log_err(M, ...) fprintf(stderr, "[ERROR] (errno: %s) " M "\n", clean_errno(), ##__VA_ARGS__)
+#define log_warn(M, ...) fprintf(stderr, "[WARN] (errno: %s) " M "\n", clean_errno(), ##__VA_ARGS__)
+#define log_info(M, ...) fprintf(stderr, "[INFO] " M "\n", ##__VA_ARGS__)
+#else
 #define log_err(M, ...) fprintf(stderr, "[ERROR] (%s:%d: errno: %s) " M "\n", __FILE__, __LINE__, clean_errno(), ##__VA_ARGS__)
-
 #define log_warn(M, ...) fprintf(stderr, "[WARN] (%s:%d: errno: %s) " M "\n", __FILE__, __LINE__, clean_errno(), ##__VA_ARGS__)
-
 #define log_info(M, ...) fprintf(stderr, "[INFO] (%s:%d) " M "\n", __FILE__, __LINE__, ##__VA_ARGS__)
-//3 macros above log messages for end user, can't be compiled out
-#define check(A, M, ...) if(!(A)) { log_err(M, ##__VA_ARGS__); errno=0; goto error; }//if A not tru, logs M and goto error: for cleanup
+#endif
 
-#define sentinel(M, ...) { log_err(M, ##__VA_ARGS__); errno=0; goto error; }
-//sentinel placed inside code you don't want to run, like if and switch cases you don't want eg: default
+#define check(A, M, ...) if(!(A)) { log_err(M, ##__VA_ARGS__); errno=0; goto error; }
 
-#define check_mem(A) check((A), "Out of memory,")//check if a pointer is valid
+#define sentinel(M, ...)  { log_err(M, ##__VA_ARGS__); errno=0; goto error; }
 
-#define check_debug(A, M, ...) if(!(A)) { debug(M, ##__VA_ARGS__); errno=0; goto error; }//still checks and handles, but doesn't log error. use for common errors
+#define check_mem(A) check((A), "Out of memory.")
+
+#define TRACE(C,E) debug("--> %s(%s:%d) %s:%d ", "" #C, State_event_name(E), E, __FUNCTION__, __LINE__)
+
+#define error_response(F, C, M, ...)  {Response_send_status(F, &HTTP_##C); sentinel(M, ##__VA_ARGS__);}
+
+#define error_unless(T, F, C, M, ...) if(!(T)) error_response(F, C, M, ##__VA_ARGS__)
+
 
 #endif
