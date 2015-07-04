@@ -2,7 +2,7 @@ CFLAGS=-g -O2 -Wall -Wextra -Isrc -rdynamic -DNDEBUG $(OPTFLAGS)
 LIBS=$(OPTLIBS)
 PREFIX?=/usr/local
 
-SOURCES=$(wildcard src/**/*.c src/*.c)
+SOURCES=$(wildcard src/*.c)
 OBJECTS=$(patsubst %.c,%.o,$(SOURCES))
 
 TEST_SRC=$(wildcard tests/*_tests.c)
