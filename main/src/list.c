@@ -1,7 +1,5 @@
-//see ex32 page on website to create project folder before compiling this
 #include "list.h"
 #include "dbg.h"
-//for_each macro iterates through for each functionto operate on target element
 List *List_create()
 {
     return calloc(1, sizeof(List));
@@ -9,7 +7,7 @@ List *List_create()
 
 void List_destroy(List *list)
 {
-    LIST_FOREACH(list, first, next, cur) {
+    LIST_FOREACH(list, first, next, cur) {//for_each macro iterates through for each functionto operate on target element
         if(cur->prev) {
             free(cur->prev);
         }
@@ -32,7 +30,7 @@ void List_clear_destroy(List *list)
     List_destroy(list);
 }
 
-void List_push(List *list, void *value)//add element to end of list
+void List_push(List *list, void *value)
 {
     ListNode *node = calloc(1, sizeof(ListNode));
     check_mem(node);
@@ -54,13 +52,13 @@ error:
     return;
 }
 
-void *List_pop(List *list)//remove element from end of list
+void *List_pop(List *list)
 {
     ListNode *node = list->last;
     return node != NULL ? List_remove(list, node) : NULL;
 }
 
-void List_unshift(List *list, void *value)//add element to front of list
+void List_unshift(List *list, void *value)
 {
     ListNode *node = calloc(1, sizeof(ListNode));
     check_mem(node);
@@ -82,17 +80,17 @@ error:
     return;
 }
 
-void *List_shift(List *list)//remove element from front of list
+void *List_shift(List *list)
 {
     ListNode *node = list->first;
     return node != NULL ? List_remove(list, node) : NULL;
 }
 
-void *List_remove(List *list, ListNode *node)//all steps for list pop and shift functions
+void *List_remove(List *list, ListNode *node)
 {
     void *result = NULL;
 
-    check(list->first && list->last, "List is empty.:");//check from dbg.h
+    check(list->first && list->last, "List is empty.:");
     check(node, "node can't be NULL");
 
     if(node == list->first && node == list->last) {

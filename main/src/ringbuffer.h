@@ -27,7 +27,7 @@ int RingBuffer_available_space(RingBuffer *buffer);
 
 bstring RingBuffer_gets(RingBuffer *buffer, int amount);
 
-#define RingBuffer_available_data(B) (((B)->end + 1) % (B)->length - (B)->start - 1)//will this macro run before or after the function it is named after?
+#define RingBuffer_available_data(B) (((B)->end + 1) % (B)->length - (B)->start - 1)
 #define RingBuffer_available_space(B) ((B)->length - (B)->end - 1)
 #define RingBuffer_full(B) (RingBuffer_available_data((B)) - (B)->length == 0)
 

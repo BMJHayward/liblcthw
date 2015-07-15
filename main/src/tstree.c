@@ -5,7 +5,7 @@
 #include "tstree.h"
 
 static inline TSTree *TSTree_insert_base(TSTree *root, TSTree *node,
-        const char *key, size_t len, void *value)//used to build the tree as we insert keys
+        const char *key, size_t len, void *value)
 {
     if(node == NULL) {//if given NULL for this arg fn will create one for you
         node = (TSTree *) calloc(1, sizeof(TSTree));
@@ -30,7 +30,10 @@ static inline TSTree *TSTree_insert_base(TSTree *root, TSTree *node,
         node->high = TSTree_insert_base(root, node->high, key, len, value);
     }//if key is higher simply insert recursively along high branch
 
-    return node;//note that you only increment through characters in the key if the first character is equal, not when low or high. makes fn much quicker, though you can get a bad key
+    return node;
+/*//you only increment through characters in the key if the first character is equal, not 
+when low or high. makes fn much quicker, though you can get a bad key
+*/
 }
 
 TSTree *TSTree_insert(TSTree *node, const char *key, size_t len, void *value)
@@ -62,7 +65,7 @@ void *TSTree_search(TSTree *root, const char *key, size_t len)
 }
 
 void *TSTree_search_prefix(TSTree *root, const char *key, size_t len)
-{//this looks like gypsy magic if i'm totally honest
+{
     if(len == 0) return NULL;
 
     TSTree *node = root;
@@ -85,7 +88,7 @@ void *TSTree_search_prefix(TSTree *root, const char *key, size_t len)
 
     node = node ? node : last;
 
-    //traverse until we find the first value in the equal chain
+    //traverse until find the first value in the equal chain
     //this is then the first node with this prefix
     while(node && !node->value) {
         node = node->equal;

@@ -1,16 +1,13 @@
-//see ex32 page on site to create project folder before compiling this
-//create structs for list and nodes
 #ifndef lcthw_List_h
 #define lcthw_List_h
 
 #include <stdlib.h>
 
 struct ListNode;
-//straight list making
 typedef struct ListNode {
     struct ListNode *next;
     struct ListNode *prev;
-    void *value;//pointer to store anything
+    void *value;
 } ListNode;
 
 typedef struct List {

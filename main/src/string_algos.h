@@ -12,11 +12,11 @@ typedef struct StringScanner {
     size_t skip_chars[UCHAR_MAX + 1];
 } StringScanner;
 //will have 2 versions of BMH alg: string_find and stringscanner_scan
-int String_find(bstring in, bstring what);//will find 1st instance of one string in another, does entire alg in one shot
+int String_find(bstring in, bstring what);
 
 StringScanner *StringScanner_create(bstring in);
 
-int StringScanner_scan(StringScanner *scan, bstring tofind);//uses struct to separate skip list fn from search fn. can scan for all instances of substring in parent string
+int StringScanner_scan(StringScanner *scan, bstring tofind);
 
 void StringScanner_destroy(StringScanner *scan);
 

@@ -1,7 +1,7 @@
 #include "list_algos.h"
 #include "dbg.h"
 
-inline void ListNode_swap(ListNode *a, ListNode *b)//saves value temp for sorting. inline tells compiler to place whole code block in function call at compile time
+inline void ListNode_swap(ListNode *a, ListNode *b)//inline tells compiler to place whole code block in function call at compile time
 {
     void *temp = a->value;
     a->value = b->value;
@@ -26,12 +26,12 @@ int List_bubble_sort(List *list, List_compare cmp)
                 }
             }
         }
-    } while(!sorted);//sorted reset to 0 after each swap, so !sorted goes back to iterate to next node and check if it has a next node
+    } while(!sorted);
 
     return 0;
 }
 
-inline List *List_merge(List *left, List *right, List_compare cmp)//merges list left and right and pushes onto new list 'result'
+inline List *List_merge(List *left, List *right, List_compare cmp)
 {
     List *result = List_create();
     void *val = NULL;
@@ -57,7 +57,7 @@ inline List *List_merge(List *left, List *right, List_compare cmp)//merges list 
     return result;
 }
 
-List *List_merge_sort(List *list, List_compare cmp)//binary sort fn, splits lists, recursively sorts into sublists then merges into final sorted list as returned. search merge sort for explanation and pseudocode
+List *List_merge_sort(List *list, List_compare cmp)
 {
     if(List_count(list) <= 1) {
         return list;

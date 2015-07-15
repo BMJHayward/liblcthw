@@ -1,10 +1,9 @@
 #ifndef _lcthw_Hashmap_h
 #define _lcthw_Hashmap_h
-//fns declared here defined in hashmap.c
 #include <stdint.h>
 #include "darray.h"
 
-#define DEFAULT_NUMBER_OF_BUCKETS 100//things are in these buckets based on hash. each bucket is a DArray containing HashmapNode structs appended to end as needed
+#define DEFAULT_NUMBER_OF_BUCKETS 100
 
 typedef int (*Hashmap_compare)(void *a, void *b);
 typedef uint32_t (*Hashmap_hash)(void *key);
@@ -12,7 +11,7 @@ typedef uint32_t (*Hashmap_hash)(void *key);
 typedef struct Hashmap {
     DArray *buckets;//this will hold HashmapNode pairs
     Hashmap_compare compare;// finds elements by their key defaults to bstrcmp to keys are bstrings
-    Hashmap_hash hash;//the hashing fn takes key processes contents produces single uint32_t index number
+    Hashmap_hash hash;//the hashing fn takes key, processes contents, produces single uint32_t index number
 } Hashmap;
 
 typedef struct HashmapNode {

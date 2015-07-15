@@ -3,15 +3,15 @@
 
 DArray *DArray_create(size_t element_size, size_t initial_max)
 {
-    DArray *array = malloc(sizeof(DArray));//set memory for whole array
+    DArray *array = malloc(sizeof(DArray));
     check_mem(array);
     array->max = initial_max;
     check(array->max > 0, "You must set an initial_max > 0.");
 
-    array->contents = calloc(initial_max, sizeof(void *));//set memory size for stuff in array
+    array->contents = calloc(initial_max, sizeof(void *));
     check_mem(array->contents);
 
-    array->end = 0;//parameters for instance of array
+    array->end = 0;
     array->element_size = element_size;
     array->expand_rate = DEFAULT_EXPAND_RATE;
 
@@ -22,7 +22,7 @@ error:
     return NULL;
 }
 
-void DArray_clear(DArray *array)//iterate through array freeing the memories from their processor masters
+void DArray_clear(DArray *array)
 {
     int i = 0;
     if(array->element_size > 0) {
@@ -34,7 +34,7 @@ void DArray_clear(DArray *array)//iterate through array freeing the memories fro
     }
 }
 
-static inline int DArray_resize(DArray *array, size_t newsize)//as name suggests
+static inline int DArray_resize(DArray *array, size_t newsize)
 {
     array->max = newsize;
     check(array->max > 0, "The newsize must be > 0.");
@@ -85,7 +85,7 @@ void DArray_clear_destroy(DArray *array)
     DArray_destroy(array);
 }
 
-int DArray_push(DArray *array, void *el)//adds element to end of array, extends length of array by 1
+int DArray_push(DArray *array, void *el)
 {
     array->contents[array->end] = el;
     array->end++;

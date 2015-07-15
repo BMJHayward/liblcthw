@@ -166,7 +166,6 @@ static inline void BSTree_replace_node_in_parent(BSTree *map, BSTreeNode *node, 
             node->parent->right = new_value;
         }
     } else {
-        // this is the root so gotta change it
         map->root = new_value;
     }
 
@@ -190,14 +189,12 @@ static inline BSTreeNode *BSTree_node_delete(BSTree *map, BSTreeNode *node, void
         if(node->left) {
             return BSTree_node_delete(map, node->left, key);
         } else {
-            // not found
             return NULL;
         }
     } else if(cmp > 0) {
         if(node->right) {
             return BSTree_node_delete(map, node->right, key);
         } else {
-            // not found
             return NULL;
         }
     } else {
@@ -210,7 +207,6 @@ static inline BSTreeNode *BSTree_node_delete(BSTree *map, BSTreeNode *node, void
             // so replace it with that right child
             BSTree_replace_node_in_parent(map, successor, successor->right);
 
-            // finally it's swapped, so return successor instead of node
             return successor;
         } else if(node->left) {
             BSTree_replace_node_in_parent(map, node, node->left);

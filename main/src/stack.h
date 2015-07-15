@@ -1,6 +1,5 @@
 #include "dbg.h"
-//maybe see ex16 structs
-typedef struct stack {//keeps track of length and current position with cur
+typedef struct stack {
     struct *next;
     void *value;
 } stack;

@@ -4,7 +4,7 @@
 #include <assert.h>
 #include "dbg.h"
 
-typedef struct DArray {//set up base array
+typedef struct DArray {
     int end;
     int max;
     size_t element_size;
@@ -12,7 +12,7 @@ typedef struct DArray {//set up base array
     void **contents;
 } DArray;
 
-DArray *DArray_create(size_t element_size, size_t initial_max);//array create with unsigned int size_t mem usage
+DArray *DArray_create(size_t element_size, size_t initial_max);
 
 void DArray_destroy(DArray *array);
 void DArray_clear(DArray *array);
@@ -30,7 +30,7 @@ void DArray_clear_destroy(DArray *array);
 
 #define DEFAULT_EXPAND_RATE 300
 
-static inline void DArray_set(DArray *array, int i, void *el)//sets array of size i?
+static inline void DArray_set(DArray *array, int i, void *el)
 {
     check(i < array->max, "darray attempt to set past max");
     if(i > array->end) array->end = i;
@@ -39,7 +39,7 @@ error:
     return;
 }
 
-static inline void *DArray_get(DArray *array, int i)//gets contents of array from element i
+static inline void *DArray_get(DArray *array, int i)
 {
     check(i < array->max, "darray attempt to get past max");
     return array->contents[i];
@@ -47,7 +47,7 @@ error:
     return NULL;
 }
 
-static inline void *DArray_remove(DArray *array, int i)//as name suggests. loop through each element to empty the array if needed
+static inline void *DArray_remove(DArray *array, int i)
 {
     void *el = array->contents[i];
     array->contents[i] = NULL;

@@ -6,7 +6,7 @@
 #include "dbg.h"
 #include "ringbuffer.h"
 
-RingBuffer *RingBuffer_create(int length)//make the struct
+RingBuffer *RingBuffer_create(int length)
 {
     RingBuffer *buffer = calloc(1, sizeof(RingBuffer));
     buffer->length = length + 1;
@@ -17,7 +17,7 @@ RingBuffer *RingBuffer_create(int length)//make the struct
     return buffer;
 }
 
-void RingBuffer_destroy(RingBuffer *buffer)//end the pitiful life of the struct
+void RingBuffer_destroy(RingBuffer *buffer)
 {
     if(buffer) {
         free(buffer->buffer);
@@ -25,13 +25,13 @@ void RingBuffer_destroy(RingBuffer *buffer)//end the pitiful life of the struct
     }
 }
 
-int RingBuffer_write(RingBuffer *buffer, char *data, int length)//adds data to buffer
+int RingBuffer_write(RingBuffer *buffer, char *data, int length)
 {
     if(RingBuffer_available_data(buffer) == 0) {//if full reset start and end to 0
         buffer->start = buffer->end = 0;
     }
 
-    check(length <= RingBuffer_available_space(buffer), "Not enough space: %d requested, %d available", RingBuffer_available_data(buffer), length);//confirm enough room
+    check(length <= RingBuffer_available_space(buffer), "Not enough space: %d requested, %d available", RingBuffer_available_data(buffer), length);
 
     void *result = memcpy(RingBuffer_ends_at(buffer), data, length);//create space for data
     check(result != NULL, "Failed to write data into buffer.");

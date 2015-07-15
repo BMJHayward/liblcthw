@@ -1,7 +1,9 @@
 #include "hashmap_algos.h"
 #include "bstrlib.h"
+
 //settings taken from:
 //www.isthe.com/chongo/tech/comp/fnv/index.html#FNV-param
+
 const uint32_t FNV_PRIME = 16777619;
 const uint32_t FNV_OFFSET_BASIS = 2166136261;
 

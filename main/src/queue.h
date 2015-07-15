@@ -1,5 +1,4 @@
 #include "dbg.h"
-//maybe see ex16 structs
 typedef struct queue {
     struct *next;
     void *value;

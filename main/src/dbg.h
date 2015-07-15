@@ -14,17 +14,19 @@
 
 // do not try to be smart and make this go away on NDEBUG, the _debug
 // here means that it just doesn't print a message, it still does the
-// check.  MKAY?
+// check.
 #define check_debug(A, M, ...) if(!(A)) { debug(M, ##__VA_ARGS__); errno=0; goto error; }
 
 #define clean_errno() (errno == 0 ? "None" : strerror(errno))
 
 #ifdef NO_LINENOS
-// versions that don't feature line numbers
+
 #define log_err(M, ...) fprintf(stderr, "[ERROR] (errno: %s) " M "\n", clean_errno(), ##__VA_ARGS__)
 #define log_warn(M, ...) fprintf(stderr, "[WARN] (errno: %s) " M "\n", clean_errno(), ##__VA_ARGS__)
 #define log_info(M, ...) fprintf(stderr, "[INFO] " M "\n", ##__VA_ARGS__)
+
 #else
+
 #define log_err(M, ...) fprintf(stderr, "[ERROR] (%s:%d: errno: %s) " M "\n", __FILE__, __LINE__, clean_errno(), ##__VA_ARGS__)
 #define log_warn(M, ...) fprintf(stderr, "[WARN] (%s:%d: errno: %s) " M "\n", __FILE__, __LINE__, clean_errno(), ##__VA_ARGS__)
 #define log_info(M, ...) fprintf(stderr, "[INFO] (%s:%d) " M "\n", __FILE__, __LINE__, ##__VA_ARGS__)

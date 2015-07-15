@@ -1,17 +1,16 @@
 /* Based on code by Andre Reinald mod'd by Z.A. Shaw */
-//find source for *map 
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 #include "radixmap.h"
 #include "dbg.h"
 
-RadixMap *RadixMap_create(size_t max)//as name suggests
+RadixMap *RadixMap_create(size_t max)
 {
-    RadixMap *map = calloc(sizeof(RadixMap), 1);//RadixMap def'd in h file
+    RadixMap *map = calloc(sizeof(RadixMap), 1);
     check_mem(map);
 
-    map->contents = calloc(sizeof(RMElement), max + 1);//RMElement def'd in h file
+    map->contents = calloc(sizeof(RMElement), max + 1);
     check_mem(map->contents);
 
     map->temp = calloc(sizeof(RMElement), max + 1);
@@ -65,7 +64,7 @@ static inline void radix_sort(short offset, uint64_t max, uint64_t *source, uint
     }
 }
 
-void RadixMap_sort(RadixMap *map)//the main piece
+void RadixMap_sort(RadixMap *map)
 {
     uint64_t *source = &map->contents[0].raw;
     uint64_t *temp = &map->temp[0].raw;
@@ -115,7 +114,7 @@ error:
     return -1;
 }
 
-int RadixMap_delete(RadixMap *map, RMElement *el)//as name suggests
+int RadixMap_delete(RadixMap *map, RMElement *el)
 {
     check(map->end > 0, "There is nothing to delete.");
     check(el != NULL, "Can't delete a NULL element.");

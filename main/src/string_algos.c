@@ -17,7 +17,10 @@ static inline void String_setup_skip_chars(//sets skip list according to nlen le
     }
 }
 
-static inline const unsigned char *String_base_search(//main search block, iterates through haystack from end using hlen decrements hlen using skip_chars list and then re-compares needle to haystack
+static inline const unsigned char *String_base_search(
+/*main search block, iterates through haystack from end using hlen,
+decrements hlen using skip_chars list and then re-compares needle to haystack
+*/
     const unsigned char *haystack, ssize_t hlen,
     const unsigned char *needle, ssize_t nlen,
     size_t *skip_chars)
@@ -43,7 +46,7 @@ static inline const unsigned char *String_base_search(//main search block, itera
         haystack += skip_chars[haystack[last]];
     }
 
-error: //fallthrough
+error: 
     return NULL;
 }
 
@@ -119,7 +122,7 @@ int StringScanner_scan(StringScanner *scan, bstring tofind)//more complex BMH al
         scan->haystack = found + scan->nlen;
         scan->hlen -= found_at - scan->nlen;
     } else {
-        //done, reset this setup
+        
         StringScanner_reset(scan);
         found_at = -1;
     }

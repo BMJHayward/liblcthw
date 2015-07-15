@@ -8,7 +8,7 @@ typedef struct TSTree {
     char splitchar;//character at this point in tree
     struct TSTree *low;
     struct TSTree *equal;
-    struct TSTree *high;//pointers to left, forward and right branches of tree
+    struct TSTree *high;
     void *value;//value for this point in tree with splitchar
 } TSTree;
 
@@ -22,7 +22,9 @@ TSTree *TSTree_insert(TSTree *node, const char *key, size_t len, void *value);//
 
 void TSTree_traverse(TSTree *node, TSTree_traverse_cb cb, void *data);
 
-void TSTree_destroy(TSTree *root);//frees nodes but not same as a TSTree_delete
-//can use TSTree to search by suffix or approximate most of the characters into groups or other algorithms
-//difficult to delete from TSTrees and uses lots more memory compared with BSTrees and hashmaps
+void TSTree_destroy(TSTree *root);
+/*frees nodes but not same as a TSTree_delete
+can use TSTree to search by suffix or approximate most of the characters into groups or other algorithms
+difficult to delete from TSTrees and uses lots more memory compared with BSTrees and hashmaps
+*/
 #endif

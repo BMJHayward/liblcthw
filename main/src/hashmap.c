@@ -32,7 +32,7 @@ static uint32_t default_hash(void *a)//this is the jenkin's hash
     hash ^= (hash >> 11);
     hash += (hash << 15);
 
-    return hash;//total mind fuck no clue what do u even lift bro etc etc
+    return hash;
 }
 
 Hashmap *Hashmap_create(Hashmap_compare compare, Hashmap_hash hash)
@@ -96,12 +96,12 @@ error:
 
 static inline DArray *Hashmap_find_bucket(Hashmap *map, void *key, int create, uint32_t *hash_out)
 {//caller fn will include 1 or 0 for int create true or false
-    uint32_t hash = map->hash(key);//get hash for the key
-    int bucket_n = hash % DEFAULT_NUMBER_OF_BUCKETS;//finds bucket will always find a bucket no matter how big
+    uint32_t hash = map->hash(key);
+    int bucket_n = hash % DEFAULT_NUMBER_OF_BUCKETS;//finds bucket, will always find a bucket no matter how big
     check(bucket_n >= 0, "Invalid bucket found: %d", bucket_n);
-    *hash_out = hash; //store it for the return so caller can use it
+    *hash_out = hash; //store it for the return so caller can use it. I forget how caller is supposed to use this
 
-    DArray *bucket = DArray_get(map->buckets, bucket_n);//gets bucket
+    DArray *bucket = DArray_get(map->buckets, bucket_n);
 
     if(!bucket && create) {//creates bucket if none found
         //new bucket, set it up
@@ -125,7 +125,7 @@ int Hashmap_set(Hashmap *map, void *key, void *data)//finds a bucket create node
     HashmapNode *node = Hashmap_node_create(hash, key, data);
     check_mem(node);
 
-    DArray_push(bucket, node);//push Kreygasm
+    DArray_push(bucket, node);
 
     return 0;
 
@@ -162,7 +162,7 @@ void *Hashmap_get(Hashmap *map, void *key)
 
     return node->data;
 
-error: //fallthrough
+error: 
     return NULL;
 }
 
@@ -202,11 +202,10 @@ void *Hashmap_delete(Hashmap *map, void *key)
     HashmapNode *ending = DArray_pop(bucket);
 
     if(ending != node) {
-        //alright looks like it's not the last one, swap it
+        //it's not the last one, swap it
         DArray_set(bucket, i, ending);
     }
 
     return data;
 }
 
-    
